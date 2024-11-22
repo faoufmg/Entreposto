@@ -1,8 +1,6 @@
 <?php
-session_start(); // Inicia a sessão
-
 // Inclui o arquivo de verificação
-include("../Funcoes/Verifica.php");
+include("../models/verifica.php");
 
 // Verifica se a sessão 'nome_cadastro' está definida
 $nome = isset($_SESSION['nome_cadastro']) ? $_SESSION['nome_cadastro'] : 'Usuário Desconhecido';
@@ -13,9 +11,9 @@ $nome = isset($_SESSION['nome_cadastro']) ? $_SESSION['nome_cadastro'] : 'Usuár
 
 <head>
   <meta charset="utf-8">
-  <title>Entreposto</title>
+  <title>Controle de Estoque: Entreposto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" href="../../public/image/icons/favicon.svg" type="image/x-icon" />
+  <link rel="shortcut icon" href="../../public/image/favicon.svg" type="image/x-icon" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
   <link rel="stylesheet" href="../../public/css/reset.css" />
   <link rel="stylesheet" href="../../public/css/bootstrap.min.css" />

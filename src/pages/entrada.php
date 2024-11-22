@@ -14,7 +14,7 @@ $pesquisa = mysqli_query($conn, "SELECT DISTINCT Nome FROM Entrada ORDER BY Nome
 
     <div class="row list-box">
       <div class="col">
-        <form action="../models/funcao_entrada.php" method="POST" enctype="multipart/form-data">
+        <form action="../models/entrada.php" method="POST" enctype="multipart/form-data">
           <div class="form-row">
 
             <div class="form-group col-md-12 col-lg-12" name="SeletorEntrada">

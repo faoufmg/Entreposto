@@ -50,7 +50,7 @@
     $('#loading-indicator').show();
     $.ajax({
       type: 'POST',
-      url: '../Funcoes/FuncaoValidade.php',
+      url: '../models/funcao_validade.php',
       data: { material: selectedMaterial },
       success: function (data) {
         $('#Informacoes').val(data);
@@ -86,7 +86,7 @@
   function Nome(selectedMaterial) {
     $.ajax({
       type: 'POST',
-      url: '../Funcoes/FuncaoNome.php',
+      url: '../models/funcao_nome.php',
       data: { material: selectedMaterial },
       success: function (data) {
         $('#material').val(data);
@@ -100,7 +100,7 @@
   function Codigo(selectedMaterial) {
     $.ajax({
       type: 'POST',
-      url: '../Funcoes/FuncaoCodigo.php',
+      url: '../models/funcao_codigo.php',
       data: { material: selectedMaterial },
       success: function (data) {
         $('#codigo').val(data);
@@ -114,7 +114,7 @@
   function Descricao(selectedMaterial) {
     $.ajax({
       type: 'POST',
-      url: '../Funcoes/FuncaoDescricao.php',
+      url: '../models/funcao_descricao.php',
       data: { material: selectedMaterial },
       success: function (data) {
         $('#descricao').val(data);
@@ -128,7 +128,7 @@
   function Local(selectedMaterial) {
     $.ajax({
       type: 'POST',
-      url: '../Funcoes/FuncaoLocal.php',
+      url: '../models/funcao_local.php',
       data: { material: selectedMaterial },
       success: function (data) {
         $('#local').val(data);
@@ -145,8 +145,6 @@
   var dataAtual = new Date();
   dataAtual.setDate(dataAtual.getDate() + 7);
   var formattedDate = dataAtual.toISOString().split('T')[0];
-  //console.log(dataAtual);
-  //console.log(formattedDate);
 
   $(document).ready(function () {
 
@@ -211,10 +209,6 @@
 <!-- PrinttoPDF and search -->
 <script>
   $(document).ready(function () {
-    //$('#example thead th').each(function () {
-    //var title = $(this).text();
-    //$(this).html('<input type="text" placeholder="' + title + '" />');
-    //});
 
     var table = $('#example').DataTable({
       scrollY: "450px",
@@ -280,10 +274,6 @@
 
 <script>
   $(document).ready(function () {
-    //$('#example thead th').each(function () {
-    //var title = $(this).text();
-    //$(this).html('<input type="text" placeholder="' + title + '" />');
-    //});
 
     var table = $('#relatorioCompleto').DataTable({
       scrollY: "450px",
