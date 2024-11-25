@@ -1,6 +1,6 @@
 <?php
 $nome = getenv("Shib-Person-CommonName");
-include_once("../../model/verifica.php");
+include_once("../models/verifica.php");
 ?>
 
 <!DOCTYPE html>

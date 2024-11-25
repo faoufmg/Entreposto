@@ -28,7 +28,8 @@ if ($total) {
     echo
       "<script>
         window.location.href = '../pages/index.php';
-      </script>";
+      </script>
+";
   }
   // Senha inválida
   else {

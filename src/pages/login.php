@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html class="bd-login" lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -22,7 +22,7 @@
 
 <body>
 
-    <section class="container mt-3 pt-3">
+    <section class="container">
         <div class="row">
 
             <div class="col text-center">
