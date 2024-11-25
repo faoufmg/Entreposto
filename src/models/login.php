@@ -17,7 +17,7 @@ if (!$login || !$senha) {
 }
 
 $SQL = "SELECT Nome, Senha FROM Usuario WHERE Nome = '" . $login . "'";
-$result_id = mysqli_query($link, $SQL) or die("Erro no banco de dados!");
+$result_id = mysqli_query($conn, $SQL) or die("Erro no banco de dados!");
 $total = mysqli_num_rows($result_id);
 
 if ($total) {

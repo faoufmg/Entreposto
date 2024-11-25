@@ -1,111 +1,68 @@
-/* Garante que o html e body ocupem toda a altura da tela */
 html,
 body {
   height: 100%;
-  margin: 0;
+  margin: 0px;
   display: flex;
   flex-direction: column;
-  padding: 0;
-  /* Remove padding */
 }
 
+/* Remove a min-height e garante que o conteúdo ocupe todo o espaço disponível */
 body {
-  padding-top: 90px !important;
-  background-color: #eeeeee;
   flex: 1;
-  position: relative;
-  min-height: 100%;
+  display: flex;
+  /* Centraliza verticalmente o conteúdo */
   align-items: center;
+  /* Centraliza horizontalmente o conteúdo */
+  justify-content: center;
+  background-color: #eeeeee;
 }
 
-section {
-  width: 80%;
+footer {
+  height: 6.5vh !important;
 }
 
-
-.container {
-  height: 765px;
-  max-width: 950px !important;
+.bd-login {
+  height: 75% !important;
 }
 
-p {
-  margin-bottom: 0 !important;
-}
-
+/* Centraliza a div list-box horizontalmente e define largura */
 .list-box {
-  padding: 25px;
-  text-align: center;
-  vertical-align: middle;
-  margin-bottom: 25px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0px 10px 15px #831D1C(0, 0, 0, 0.1);
-  border-left: 2px solid #831D1C;
-  transition: all 0.3s ease;
-}
-
-
-.btn:hover {
-  background-color: #502828;
-  /* Cor ao passar o mouse */
-  color: white;
-}
-
-/* Animação ao passar o mouse em cima */
-.box:hover {
-  box-shadow: 0px 5px 5px 0px #831D1C;
-}
-
-.content {
-  background-color: #ffffff;
+  max-width: 1500px;
+  /* Define uma largura máxima */
+  width: 100%;
+  /* Faz a largura ocupar 100% até o máximo de 1500px */
+  margin: auto;
+  /* Centraliza horizontalmente */
   padding: 10px;
-  height: 600px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  border-left: 2px solid #831D1C;
+  max-height: 70vh;
+  overflow: auto;
 }
 
-.classheader {
-  padding: 0px 0px 0px 25px !important;
+/* Logo */
+.logo {
+  margin-right: 130px;
+  padding-left: 10px;
+  width: 10px;
+  height: auto;
 }
 
-.conteudo {
-  margin-bottom: 250px;
-}
-
-.cadastro {
-  margin-bottom: 90px;
-}
-
-.listar {
-  margin-bottom: 70px;
-}
-
+/* Navegação no cabeçalho */
 .navbar-dark .navbar-nav .nav-link {
   font-size: 18px;
   text-transform: uppercase;
   color: #831D1C !important;
-}
-
-.navbar-dark .navbar-nav .active>.nav-link {
   font-weight: bold;
-}
-
-/* Efeito nos links do cabeçalho ao passar o mouse */
-.navbar-nav .nav-link:hover {
-  color: #ff0000 !important;
-  /* Altera a cor do texto ao passar o mouse */
-  /* Adiciona um sublinhado ao passar o mouse */
-}
-
-/* Logo */
-.logo-laranjal {
-  margin-right: 30px;
-  padding-left: 30px;
 }
 
 /* Estilização do cabeçalho */
 .bg {
   background-color: #cccccc;
   z-index: 999;
-  padding: 20px;
+  padding: 10px;
 }
 
 /* Logout do usuário */
@@ -113,22 +70,127 @@ p {
   margin-right: 8px;
 }
 
-.nav button i {
-  margin-left: 10px;
+/* Efeito nos links do cabeçalho ao passar o mouse */
+.navbar-nav .nav-link:hover {
+  color: #831D1C !important;
+  /* Altera a cor do texto ao passar o mouse */
+  /* Adiciona um sublinhado ao passar o mouse */
 }
 
-.nav-top {
-  padding-top: 10px;
-  padding-bottom: 10px;
+/* Aumenta a proporção */
+p.copy {
+  margin-bottom: 0 !important;
+  color: white;
 }
 
-.principal {
+/* Estiliza os botões do formulário */
+.btn {
+  background-color: #831D1C;
+  /* Cor do botão */
+  color: rgb(255, 255, 255);
+  border: none;
+}
+
+.btn:hover {
+  background-color: #831D1C;
+  /* Cor ao passar o mouse */
+  color: white;
+}
+
+section.conteudo {
+  padding-bottom: 100px;
+  /* Adiciona espaçamento no final da seção */
+  overflow: hidden;
+  /* Garante que o conteúdo se ajuste se for muito grande */
+  padding-top: 20px;
   margin-bottom: 30px;
+  /* Adicionar espaçamento inferior entre o conteúdo e o footer */
+  max-width: 100%;
+
+}
+
+section.conteudo-visualizar {
+  max-width: 85%;
+}
+
+/* Faz o espaçamento entre o header e o footer */
+section.principal {
+  padding: 100px 0 !important;
+  flex: 1;
+  /* Faz o conteúdo expandir para preencher o espaço disponível */
+}
+
+section.principal-index {
+  padding: 20vh 0 !important;
+  flex: 1;
+  /* Faz o conteúdo expandir para preencher o espaço disponível */
+}
+
+.container-fluid {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.ticket-matriz {
+  margin-top: 45px;
+}
+
+.section-box {
+  border: 2px solid #ccc;
+  /* Define o contorno */
+  border-radius: 8px;
+  /* Arredonda os cantos */
+  padding: 20px;
+  /* Espaçamento interno */
+  margin-bottom: 20px;
+  /* Espaçamento inferior entre as seções */
+  background-color: #f9f9f9;
+  /* Cor de fundo leve para destaque */
+}
+
+.logo-laranjal-fao {
+  margin-right: 30px;
+  padding-left: 30px;
+}
+
+.login-text {
+  margin-top: 90px;
+  margin-right: 17px;
+  padding-bottom: 20px;
+}
+
+.esquececadastro {
+  margin-right: 15px;
+  color: #831D1C;
+  /* Cor do link */
+  text-decoration: none;
+  /* Remove o sublinhado padrão */
+  font-weight: bold;
+  /* Negrito para dar destaque */
+  padding: 5px;
+  /* Espaçamento interno */
+  transition: color 0.3s ease, background-color 0.3s ease;
+  /* Transição suave */
+}
+
+/*  */
+.esquececadastro a:hover {
+  color: #831D1C;
+  /* Cor do texto ao passar o mouse */
+  text-decoration: underline;
+  /* Sublinhado ao passar o mouse */
+  border-radius: 4px;
+  /* Deixa as bordas levemente arredondadas */
+}
+
+.g-2,
+.gy-2 {
+  width: 65vw;
 }
 
 /* Melhora a visibilidade das divs */
 .box {
-  padding: 50px;
+  padding: 30px;
   text-align: center;
   vertical-align: middle;
   margin-bottom: 25px;
@@ -137,66 +199,123 @@ p {
   border-left: 2px solid #831D1C;
   box-shadow: 0px 15px 10px -15px #471515;
   transition: all 0.3s ease;
+  height: 14vh;
 }
 
+/* Animação ao passar o mouse em cima */
 .box:hover {
-  box-shadow: 0px 5px 5px 0px #831D1C(0, 255, 0, 0.2);
+  box-shadow: 0px 5px 5px 0px #831D1C;
 }
 
-.sombra {
-  background-color: #ffffff;
-  box-shadow: 0px 15px 10px -15px rgba(82, 63, 105, 0.1);
-  margin-top: 96px;
-  z-index: 2;
-}
-
-h3.text-center {
-  margin-bottom: 25px !important;
-}
-
-p.copy {
-  margin-bottom: 0 !important;
-}
-
-.list-group-item.active {
-  background-color: #591df1;
-  border-color: #591df1;
-}
-
-.btn-outline-primary {
-  color: #591df1;
-  border-color: #591df1;
-}
-
-.bread {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-p {
-  margin-bottom: 0 !important;
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-  background-color: #831D1C;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-  cursor: pointer;
-}
-
-.divScroll {
-  overflow-y: scroll;
-  height: 75px;
-}
-
+/* Cor das letras das divs do index */
 .redirecionamento {
   color: #831D1C;
   text-decoration: none;
+  width: 100%;
+  height: 15vh;
 }
 
+/* Mudar a cor do link ao passar o mouse nas divs do index*/
 .redirecionamento:hover {
   color: rgb(197, 0, 0);
   text-decoration: none;
+}
+
+/* Botão de voltar do visualizar */
+.col.text-center {
+  margin-bottom: 50px;
+  /* Para dar espaço entre o botão e o footer */
+  margin-bottom: 50px;
+  ;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+}
+
+.img-logo-header {
+  width: 6vw;
+  height: 6vh;
+  margin-left: -25px;
+  margin-right: -15px;
+}
+
+.img-footer {
+  width: 6vw;
+  height: 6vh;
+}
+
+@media only screen and (max-height: 930px) {
+
+  /* Ajustes para telas menores */
+  .box {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border-left: 2px solid #831D1C;
+    box-shadow: 0px 15px 10px -15px #471515;
+    transition: all 0.3s ease;
+    height: 10vh;
+    display: flex; /* Torna a box um contêiner flexível */
+    flex-direction: column;
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+  }
+
+  .redirecionamento {
+    color: #831D1C;
+    text-decoration: none;
+    width: 100%;
+    height: 10vh;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body {
+    min-height: 100vh; /* Faz o body ocupar pelo menos 100% da altura da viewport */
+  }
+
+  section.principal {
+    flex: 1; /* Ocupa o espaço restante entre o header e o footer */
+    max-height: 100vh; /* Limita a altura da section à altura da viewport */
+    overflow-y: auto;  /* Adiciona rolagem vertical se necessário */
+    background-color: #f5f5f5;
+    padding: 30px;
+    width: 100%;
+    padding-top: 10vh;
+    margin-top: -5vh;
+    
+    display: flex; /* Torna a section um contêiner flexível */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha se necessário */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: flex-start; /* Alinha os itens no topo verticalmente */
+  }
+
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .container-fluid {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+
 }

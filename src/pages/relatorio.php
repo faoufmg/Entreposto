@@ -24,37 +24,38 @@ function Pesquisa()
 
 <section class="conteudo">
   <div class="container-fluid">
+
     <figure class="text-center">
       <h1>Relatórios</h1>
     </figure>
-  </div>
 
-  <br>
-  <div class="row list-box">
-    <div class="col">
-      <form action="../Funcoes/RelatorioData.php" method="POST" enctype=multipart/form-data>
-        <div class="form-row">
-          <div class="col-md-6 col-lg-6">
-            <label><strong>Data Início</strong></label>
-            <input type="date" name="data_inicio" class="form-control" id="data_inicio">
+    <div class="row list-box">
+      <div class="col">
+        <form action="../Funcoes/RelatorioData.php" method="POST" enctype=multipart/form-data>
+          <div class="row">
+
+            <div class="col-md-12 text-center">
+              <label><strong>Data Início</strong></label>
+              <input type="date" name="data_inicio" class="form-control" id="data_inicio">
+            </div>
+
+            <div class="col-md-12 text-center">
+              <label><strong>Data Fim</strong></label>
+              <input type="date" name="data_fim" class="form-control" id="data_fim">
+            </div>
+
+            <div class="col text-center mt-3">
+              <button type="submit" class="btn btn-primary" style="background-color: #831D1C">Pesquisar</button>
+              <a type="button" class="btn btn-primary" style="background-color: #831D1C"
+                href="../Funcoes/RelatorioCompleto.php">Relatório Completo</a>
+              <a class="btn btn-secondary" href="../pages/index.php">Voltar</a>
+            </div>
+            
           </div>
-          <div class="col-md-6 col-lg-6">
-            <label><strong>Data Fim</strong></label>
-            <input type="date" name="data_fim" class="form-control" id="data_fim">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col text-center mt-3">
-            <br>
-            <button type="submit" class="btn btn-primary" style="background-color: #831D1C">Pesquisar</button>
-            <a type="button" class="btn btn-primary" style="background-color: #831D1C"
-              href="../Funcoes/RelatorioCompleto.php">Relatório Completo</a>
-            <a class="btn btn-secondary" href="../pages/index.php">Voltar</a>
-          </div>
-        </div>
-      </form>
+
+        </form>
+      </div>
     </div>
-  </div>
 
   </div>
   <br>

@@ -2,90 +2,77 @@
 include_once('../partials/header.php');
 ?>
 
-<html lang="pt-br">
+<section class="principal-index bg-color-cinza">
+  <div class="container-fluid">
 
-<head>
-  <meta charset="utf-8">
-  <title>Controle de Estoque: Entreposto FAO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" href="../../public/image/favicon.svg" />
-</head>
+    <figure class="text-center">
+      <h1>Entreposto</h1>
+    </figure>
 
-<body>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="row gy-2">
 
-  <section class="principal bg-color-cinza" height="100%">
-    <div class="container-fluid">
-
-      <figure class="text-center mt-3">
-        <h1>Entreposto</h1>
-      </figure>
-
-      <div class="row">
-        <div class="col">
-          <div class="row">
-
-            <div class="col-md-6 col-lg-6">
-              <a href="../pages/entrada.php">
-                <div class="box align-middle">
-                  <img src="../../public/image/icons/criar.svg" width="65px" height="65px" alt="Adicionar Produto">
-                  <p class="acoes text-center align-middle"><span class="font-weight-bold">Novo</span> Produto</p>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-6 col-lg-6">
-              <a href="../pages/retirada.php">
-                <div class="box align-middle">
-                  <img src="../../public/image/icons/retirar.svg" width="65px" height="65px" alt="Retirar Produto">
-                  <p class="acoes text-center align-middle"><span class="font-weight-bold">Retirar</span> Produto</p>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-6 col-lg-6">
-              <a href="../pages/demanda.php">
-                <div class="box align-middle">
-                  <img src="../../public/image/icons/pendente.svg" width="65px" height="65px" alt="Retirar Produto">
-                  <p class="acoes text-center align-middle"><span class="font-weight-bold">Solicitar</span> Produto</p>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-6 col-lg-6">
-              <a href="../pages/editar.php">
-                <div class="box align-middle">
-                  <img src="../../public/image/icons/editar.svg" width="65px" height="65px" alt="Retirar Produto">
-                  <p class="acoes text-center align-middle"><span class="font-weight-bold">Editar</span> Produto</p>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-6 col-lg-6">
-              <a href="../pages/visualizar.php">
-                <div class="box align-middle">
-                  <img src="../../public/image/icons/listar.svg" width="65px" height="65px" alt="Listar Produtos">
-                  <p class="acoes text-center align-middle"><span class="font-weight-bold">Listar</span> Produtos</p>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-6 col-lg-6">
-              <a href="../pages/relatorio.php">
-                <div class="box align-middle">
-                  <img src="../../public/image/icons/relatorio.svg" width="65px" height="65px"
-                    alt="Relatório de Estoque">
-                  <p class="acoes text-center align-middle"><span class="font-weight-bold">Relatório</span> de Estoque
-                  </p>
-                </div>
-              </a>
-            </div>
-
+          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/entrada.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/criar.svg" width="65px" height="65px" alt="Adicionar Produto">
+                <p class="acoes text-center fw-bold">Novo Produto</p>
+              </div>
+            </a>
           </div>
+
+          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/retirada.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/retirar.svg" width="65px" height="65px" alt="Retirar Produto">
+                <p class="acoes text-center fw-bold">Retirar Produto</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/demanda.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/pendente.svg" width="65px" height="65px" alt="Retirar Produto">
+                <p class="acoes text-center fw-bold">Solicitar Produto</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/editar.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/editar.svg" width="65px" height="65px" alt="Retirar Produto">
+                <p class="acoes text-center fw-bold">Editar Produto</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/visualizar.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/listar.svg" width="65px" height="65px" alt="Listar Produtos">
+                <p class="acoes text-center fw-bold">Listar Produtos</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/relatorio.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/relatorio.svg" width="65px" height="65px" alt="Relatório de Estoque">
+                <p class="acoes text-center fw-bold">Relatório de Estoque
+                </p>
+              </div>
+            </a>
+          </div>
+
         </div>
       </div>
     </div>
-  </section>
-</body>
+  </div>
+</section>
 
 
 <?php

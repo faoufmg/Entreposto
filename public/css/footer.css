@@ -1,40 +1,36 @@
 /* Estiliza o footer */
 footer {
-    background-color: #831D1C;
-    color: white;
+    background-color: #831D1C !important;
+    color: black;
     text-align: center;
-    /* Centraliza o texto */
     width: 100%;
-    padding: 0.2px;
+    height: 30px;
+    padding: 3px;
     margin-top: auto;
+    /* Garante que o footer fique sempre no final */
+    position: absolute;
+    bottom: 0;
 }
 
-/* Retira o azul e o sublinhado do href */
-footer a {
-    color: white;
+/* Define os links no footer */
+footer .copy a {
+    color: white !important;
     text-decoration: none;
 }
 
-/* Efeito no link ao passar o mouse */
+footer .copy a:hover {
+    text-decoration: underline;
+}
+
+/* Anima o footer ao passar o mouse */
 footer a:hover {
-    font-weight: bold;
+    font-weight: bolder;
+    text-decoration: underline;
     color: white;
 }
 
-/* Modifica o fundo e a cor do texto do footer */
-.footer-direita {
-    background-color: #831D1C;
-    color: white;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* Centraliza os itens em uma coluna */
-    align-items: center;
-    /* Centraliza o conteúdo horizontalmente */
-}
-
-/* Ajusta a imagem no footer */
+/* Dimensões da imagem do footer */
 .footer-img {
-    max-width: 150px;
+    width: 120px;
     height: auto;
 }
