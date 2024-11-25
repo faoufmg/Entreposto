@@ -18,7 +18,7 @@ function Pesquisa()
   $Saida = mysqli_query($conn, "SELECT * FROM Saida WHERE DataSaida BETWEEN '$data_inicio' AND '$data_fim'");
 
   $Demanda = mysqli_query($conn, "SELECT * FROM Demanda WHERE DataDemanda BETWEEN '$data_inicio' AND '$data_fim'");
-  echo '<meta http-equiv="refresh" content="0;URL=../Home/Relatorio.php">';
+  echo '<meta http-equiv="refresh" content="0;URL=../relatorio.php">';
 }
 ?>
 
@@ -31,7 +31,7 @@ function Pesquisa()
 
     <div class="row list-box">
       <div class="col">
-        <form action="../Funcoes/RelatorioData.php" method="POST" enctype=multipart/form-data>
+        <form action="relatorio_data.php" method="POST" enctype=multipart/form-data>
           <div class="row">
 
             <div class="col-md-12 text-center">
@@ -47,7 +47,7 @@ function Pesquisa()
             <div class="col text-center mt-3">
               <button type="submit" class="btn btn-primary" style="background-color: #831D1C">Pesquisar</button>
               <a type="button" class="btn btn-primary" style="background-color: #831D1C"
-                href="../Funcoes/RelatorioCompleto.php">Relatório Completo</a>
+                href="relatorio_completo.php">Relatório Completo</a>
               <a class="btn btn-secondary" href="../pages/index.php">Voltar</a>
             </div>
             
