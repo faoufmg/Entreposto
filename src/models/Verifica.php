@@ -8,7 +8,7 @@
     // Usuário não logado! Redireciona para a página de login
     echo
     "<script>
-        window.location.href = '../login.php';
+        window.location.href = '../pages/login.php';
     </script>";
     }
 ?>

@@ -34,7 +34,7 @@ $login = getenv("Shib-Person-UID");
         <div class="row">
             <div class="col text-center">
                 <div class="col">
-                    <form action="../models/cadastro.php" method="POST">
+                    <form action="../models/cadastro_usuario.php" method="POST">
                         <div class="row list-box">
                             <div class="form-group col-md-12 col-lg-12">
                                 <label for="nome"><strong>Nome</strong></label>

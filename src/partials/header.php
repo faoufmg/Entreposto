@@ -10,7 +10,7 @@ include_once("../models/verifica.php");
   <meta charset="utf-8">
   <title>Controle de Estoque: Entreposto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" href="../../../public/image/jad.jpg" type="image/x-icon" />
+  <link rel="shortcut icon" href="../../../public/image/favicon.png" type="image/x-icon" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 
   <!-- DataTables -->
@@ -38,6 +38,7 @@ include_once("../models/verifica.php");
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav me-auto">
+          <li class="nav-item active"><a class="nav-link" href="../pages/cadastro_produto.php">Cadastro</a></li>
           <li class="nav-item active"><a class="nav-link" href="../pages/entrada.php">Entrada</a></li>
           <li class="nav-item active"><a class="nav-link" href="../pages/retirada.php">Retirada</a></li>
           <li class="nav-item active"><a class="nav-link" href="../pages/demanda.php">Demanda</a></li>

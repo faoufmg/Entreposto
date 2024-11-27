@@ -3,17 +3,22 @@ include_once("../../config/db.php");
 
 $selectedMaterial = $_POST['material'];
 
-$sql = "SELECT Nome FROM Entrada WHERE Nome = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $selectedMaterial);
-$stmt->execute();
-$result = $stmt->get_result();
+try {
 
-if ($result->num_rows > 0) {
-  $row = $result->fetch_assoc();
-  echo $row['Nome'];
+    // Consulta preparada para evitar injeção de SQL
+    $sql = "SELECT Nome FROM Produto WHERE Nome = :material";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':material', $selectedMaterial, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // Verifica se há resultados
+    if ($stmt->rowCount() > 0) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo $row['Nome'];
+    }
+
+} catch (PDOException $e) {
+    // Tratamento de erros
+    echo "Erro ao acessar o banco de dados: " . $e->getMessage();
 }
-
-$stmt->close();
-$conn->close();
 ?>

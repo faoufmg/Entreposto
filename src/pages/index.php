@@ -14,28 +14,10 @@ include_once('../partials/header.php');
         <div class="row gy-2">
 
           <div class="col-md-6 col-lg-6 d-flex justify-content-center">
-            <a class="redirecionamento" href="../pages/entrada.php">
+            <a class="redirecionamento" href="../pages/cadastro_produto.php">
               <div class="box d-flex flex-column align-items-center">
                 <img src="../../public/image/icons/criar.svg" width="65px" height="65px" alt="Adicionar Produto">
-                <p class="acoes text-center fw-bold">Novo Produto</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
-            <a class="redirecionamento" href="../pages/retirada.php">
-              <div class="box d-flex flex-column align-items-center">
-                <img src="../../public/image/icons/retirar.svg" width="65px" height="65px" alt="Retirar Produto">
-                <p class="acoes text-center fw-bold">Retirar Produto</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-6 d-flex justify-content-center">
-            <a class="redirecionamento" href="../pages/demanda.php">
-              <div class="box d-flex flex-column align-items-center">
-                <img src="../../public/image/icons/pendente.svg" width="65px" height="65px" alt="Retirar Produto">
-                <p class="acoes text-center fw-bold">Solicitar Produto</p>
+                <p class="acoes text-center fw-bold">Cadastro</p>
               </div>
             </a>
           </div>
@@ -45,6 +27,33 @@ include_once('../partials/header.php');
               <div class="box d-flex flex-column align-items-center">
                 <img src="../../public/image/icons/editar.svg" width="65px" height="65px" alt="Retirar Produto">
                 <p class="acoes text-center fw-bold">Editar Produto</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-4 col-lg-4 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/entrada.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/criar.svg" width="65px" height="65px" alt="Adicionar Produto">
+                <p class="acoes text-center fw-bold">Entrada</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-4 col-lg-4 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/retirada.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/retirar.svg" width="65px" height="65px" alt="Retirar Produto">
+                <p class="acoes text-center fw-bold">Retirar Produto</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-4 col-lg-4 d-flex justify-content-center">
+            <a class="redirecionamento" href="../pages/demanda.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/pendente.svg" width="65px" height="65px" alt="Retirar Produto">
+                <p class="acoes text-center fw-bold">Solicitar Produto</p>
               </div>
             </a>
           </div>

@@ -6,7 +6,7 @@ $selectedMaterial = $_POST['material'];
 try {
 
     // Consulta preparada para evitar injeção de SQL
-    $sql = "SELECT Descricao FROM Produto WHERE Nome = :material";
+    $sql = "SELECT Local FROM Produto WHERE Nome = :material";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':material', $selectedMaterial, PDO::PARAM_STR);
     $stmt->execute();
@@ -14,7 +14,7 @@ try {
     // Verifica se há resultados
     if ($stmt->rowCount() > 0) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo $row['Descricao'];
+        echo $row['Local'];
     }
 
 } catch (PDOException $e) {
