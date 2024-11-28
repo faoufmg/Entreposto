@@ -1,7 +1,17 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+trigger_error("Este é um teste de erro.", E_USER_WARNING);
+
 include_once("../../config/db.php");
 include_once("verifica.php");
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 function sanitizeInput($data)
 {
@@ -13,6 +23,7 @@ function sanitizeInt($data)
     return filter_var($data, FILTER_VALIDATE_INT);
 }
 
+// Verifica autenticação do usuário
 if (!isset($_SESSION["nome_cadastro"])) {
     echo "<script>
             alert('Erro: Usuário não autenticado.');
@@ -21,21 +32,29 @@ if (!isset($_SESSION["nome_cadastro"])) {
     exit();
 }
 
+// Recebe os dados do formulário
 $Nome = isset($_POST['material']) ? sanitizeInput($_POST['material']) : NULL;
 $Validade = isset($_POST['data_validade']) ? sanitizeInput($_POST['data_validade']) : NULL;
 $Quantidade = isset($_POST['quantidade']) ? sanitizeInt($_POST['quantidade']) : NULL;
 
-date_default_timezone_set('America/Sao_Paulo');
-$DataCad = date('Y-m-d H:i:s');
+if ($Quantidade === NULL || $Quantidade <= 0) {
+    echo "<script>
+            alert('Erro: Quantidade inválida ou não fornecida.');
+            window.location.href = '../pages/entrada.php';
+          </script>";
+    exit();
+}
 
-$Usuario = $_SESSION["nome_cadastro"];
+date_default_timezone_set('America/Sao_Paulo');
+$DataCad = date('Y-m-d H:i:s'); // Data de cadastro
+$Usuario = htmlspecialchars($_SESSION["nome_cadastro"], ENT_QUOTES, 'UTF-8'); // Usuário autenticado
 
 try {
     if (!$Nome) {
         throw new Exception("Erro: Nome não fornecido.");
     }
 
-    // Buscar Produto_id
+    // Busca o ID do produto
     $query = "SELECT Produto_id FROM Produto WHERE Nome = :Nome";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':Nome', $Nome, PDO::PARAM_STR);
@@ -46,17 +65,19 @@ try {
         throw new Exception("Erro: Produto não encontrado.");
     }
 
-    // Validar data de validade
-    if ($Validade && !DateTime::createFromFormat('Y-m-d', $Validade)) {
+    // Valida a data de validade (se fornecida)
+    $date = DateTime::createFromFormat('Y-m-d', $Validade);
+    if ($Validade && (!$date || $date->format('Y-m-d') !== $Validade)) {
         throw new Exception("Erro: Data de validade inválida.");
     }
 
     $Validade = $Validade ?: NULL;
 
-    // Verificar entrada existente
+    // Verifica se já existe uma entrada para o mesmo produto e validade
     $query = "SELECT Entrada_id, QuantidadeEntrou, QuantidadeRestante 
               FROM Entrada 
-              WHERE Produto_id = :Produto_id AND (Validade = :Validade OR (:Validade IS NULL AND Validade IS NULL))";
+              WHERE Produto_id = :Produto_id AND 
+                    (Validade = :Validade OR (Validade IS NULL AND :Validade IS NULL))";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':Produto_id', $Produto_id, PDO::PARAM_INT);
     $stmt->bindParam(':Validade', $Validade, PDO::PARAM_STR);
@@ -64,34 +85,61 @@ try {
     $entradaExistente = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($entradaExistente) {
-        // Atualizar entrada existente
-        $novaQuantidade = $entradaExistente['QuantidadeEntrou'] + $Quantidade;
-        $novoRestante = $entradaExistente['QuantidadeRestante'] + $Quantidade;
+        // Atualiza a entrada existente
+        // $novaQuantidade = $entradaExistente['Quantidade'] + $Quantidade;
 
-        $query = "UPDATE Entrada 
-                  SET QuantidadeEntrou = :novaQuantidade, QuantidadeRestante = :novoRestante, DataCad = :DataCad, Usuario = :Usuario 
-                  WHERE Entrada_id = :Entrada_id";
+        // $query = "UPDATE Entrada
+        //           SET Quantidade = :novaQuantidade, Usuario = :Usuario 
+        //           WHERE Entrada_id = :Entrada_id";
+        // $stmt = $pdo->prepare($query);
+        // $stmt->bindParam(':novaQuantidade', $novaQuantidade, PDO::PARAM_INT);
+        // $stmt->bindParam(':Usuario', $Usuario, PDO::PARAM_STR);
+        // $stmt->bindParam(':Entrada_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
+        // $stmt->execute();
+
+        // // Atualiza a data na tabela MovimentacaoDatas
+        // $query = "INSERT INTO MovimentacaoDatas (OrigemMovimentacao, Movimentacao_id, DataMovimentacao)
+        //           VALUES ('Entrada', :Movimentacao_id, :DataMovimentacao)";
+        // $stmt = $pdo->prepare($query);
+        // $stmt->bindParam(':Movimentacao_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
+        // $stmt->bindParam(':DataMovimentacao', $DataCad, PDO::PARAM_STR);
+        // $stmt->execute();
+
+        echo "<script>
+                alert('Entrada atualizada com sucesso.');
+                window.location.href = '../pages/entrada.php';
+              </script>";
+    } else {
+
+        // Insere na tabela MovimentacaoDatas
+        $query = "INSERT INTO MovimentacaoDatas (OrigemMovimentacao, DataMovimentacao)
+                  VALUES ('Entrada', :DataMovimentacao)";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':novaQuantidade', $novaQuantidade, PDO::PARAM_INT);
-        $stmt->bindParam(':novoRestante', $novoRestante, PDO::PARAM_INT);
-        $stmt->bindParam(':DataCad', $DataCad, PDO::PARAM_STR);
-        $stmt->bindParam(':Usuario', $Usuario, PDO::PARAM_STR);
-        $stmt->bindParam(':Entrada_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':DataMovimentacao', $DataCad, PDO::PARAM_STR);
         $stmt->execute();
 
-        // Inserir em DataCadastro
-        $queryInsercaoData = "INSERT INTO DataCadastro (Entrada_id, Data) VALUES (:Entrada_id, :Data)";
-        $stmt = $pdo->prepare($queryInsercaoData);
-        $stmt->bindParam(':Entrada_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
-        $stmt->bindParam(':Data', $DataCad, PDO::PARAM_STR);
+        $MovimentacaoDatas_id = $pdo->lastInsertId();
+
+        // Insere nova entrada
+        $query = "INSERT INTO Entrada (Produto_id, Validade, QuantidadeEntrou, Usuario, QuantidadeRestante, MovimentacaoDatas_id)
+                  VALUES (:Produto_id, :Validade, :QuantidadeEntrou, :Usuario, :QuantidadeRestante, :MovimentacaoDatas_id)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':Produto_id', $Produto_id, PDO::PARAM_INT);
+        $stmt->bindParam(':Validade', $Validade, PDO::PARAM_STR);
+        $stmt->bindParam(':QuantidadeEntrou', $Quantidade, PDO::PARAM_INT);
+        $stmt->bindParam(':Usuario', $Usuario, PDO::PARAM_STR);
+        $stmt->bindParam(':QuantidadeRestante', $Quantidade, PDO::PARAM_INT);
+        $stmt->bindParam(':MovimentacaoDatas_id', $MovimentacaoDatas_id, PDO::PARAM_INT);
         $stmt->execute();
+
+        echo "teste2";
+
+        echo "teste3";
 
         echo "<script>
                 alert('Entrada cadastrada com sucesso.');
                 window.location.href = '../pages/entrada.php';
               </script>";
-    } else {
-        throw new Exception("Erro: Nenhuma entrada encontrada para atualizar.");
     }
 } catch (Exception $e) {
     echo "<script>
@@ -99,4 +147,3 @@ try {
             window.location.href = '../pages/entrada.php';
           </script>";
 }
-?>
