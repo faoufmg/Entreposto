@@ -2,29 +2,49 @@
 include_once("../partials/header.php");
 include_once("../../config/db.php");
 
-$PesquisaProduto = mysqli_query($conn, "SELECT DISTINCT CONCAT(UCASE(LEFT(Nome, 1)), LCASE(SUBSTRING(Nome, 2))) AS Nome FROM Entrada ORDER BY Nome ASC");
-$PesquisaDestino = mysqli_query($conn, "SELECT Destino FROM Destino ORDER BY Destino");
+try {
+  // Prepara e executa a consulta para buscar os nomes dos produtos
+  $query = "SELECT DISTINCT P.Nome
+            FROM Entrada AS E
+            JOIN Produto AS P
+            ON E.Produto_id = P.Produto_id";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute();
+
+  // Obtém os resultados
+  $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  $queryDestino = "SELECT Destino FROM Destino ORDER BY Destino ASC";
+  $stmt = $pdo->prepare($queryDestino);
+  $stmt->execute();
+
+  $resultadosDestino = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+  die("Erro na consulta: " . $e->getMessage());
+}
+
 ?>
 
 <section class="conteudo">
   <div class="container-fluid">
 
     <figure class="text-center">
-      <h1>Acrescentar Novo Lote</h1>
+      <h1>Retirar Produto</h1>
     </figure>
 
     <div class="row list-box">
       <div class="col">
-        <form action="../models/entrada.php" method="POST" enctype="multipart/form-data">
+        <form action="../models/retirada.php" method="POST" enctype="multipart/form-data">
           <div class="row">
 
-            <div class="col-md-12 text-center" name="SeletorEntrada">
-              <select class="form-select" data-width="100%" data-size="6" id="SeletorEntrada" data-live-search="true"
-                name="SeletorEntrada" title="Selecione o Produto" onchange="Validade(this.value)">
+            <div class="col-md-12 text-center" name="SeletorRetirada">
+              <select class="form-select" data-width="100%" data-size="6" id="SeletorRetirada" data-live-search="true"
+                name="SeletorRetirada" title="Selecione o Produto" onchange="Informacoes(this.value)">
                 <option selected>Selecionar Produto</option>
                 <?php
-                while ($linha1 = mysqli_fetch_array($PesquisaProduto)) {
-                  echo '<option value="' . $linha1['Nome'] . '">' . $linha1['Nome'] . '</option>';
+                // Exibe os resultados na lista suspensa
+                foreach ($resultados as $row) {
+                  echo "<option>" . htmlspecialchars($row['Nome'], ENT_QUOTES, 'UTF-8') . "</option>";
                 }
                 ?>
               </select>
@@ -32,23 +52,24 @@ $PesquisaDestino = mysqli_query($conn, "SELECT Destino FROM Destino ORDER BY Des
 
             <div class="col-md-6 text-center">
               <label for="Informacoes"><strong>Informações do Produto</strong></label>
-              <input type="text" name="Informacoes" readonly class="form-control" id="Informacoes" required>
+              <input type="text" name="Informacoes" placeholder="Selecione o produto que se deseja retirar" readonly class="form-control" id="Informacoes" required>
             </div>
 
             <div class="col-md-6 text-center">
               <label for="Quantidade"><strong>Quantidade</strong></label>
-              <input type="text" name="Quantidade" placeholder="Digite a quantidade a ser retirada" class="form-control"
+              <input type="number" name="Quantidade" placeholder="Digite a quantidade a ser retirada" class="form-control"
                 id="Quantidade" min="0" max="9999999" oninput="validity.valid||(value='');" required>
             </div>
 
-            <div class="col-md-6 text-center" name="SeletorEntrada">
+            <div class="col-md-6 text-center">
               <label for="Destino"><strong>Destino</strong></label>
-              <select class="form-select" data-width="100%" data-size="6" id="SeletorEntrada" data-live-search="true"
-                name="SeletorEntrada" title="Selecione o Produto" onchange="Dados(this.value)">
+              <select class="form-select" data-width="100%" data-size="6" id="Destino" data-live-search="true"
+                name="Destino" title="Selecione o destino" onchange="Dados(this.value)">
                 <option selected>Selecione o Destino</option>
                 <?php
-                while ($linha3 = mysqli_fetch_array($PesquisaDestino)) {
-                  echo '<option value="' . $linha3['Destino'] . '">' . $linha3['Destino'] . '</option>';
+                // Exibe os resultados na lista suspensa
+                foreach ($resultadosDestino as $row) {
+                  echo "<option>" . htmlspecialchars($row['Destino'], ENT_QUOTES, 'UTF-8') . "</option>";
                 }
                 ?>
               </select>
@@ -56,8 +77,7 @@ $PesquisaDestino = mysqli_query($conn, "SELECT Destino FROM Destino ORDER BY Des
 
             <div class="col-md-6 text-center">
               <label for="Observacao"><strong>Observação</strong></label>
-              <input type="number" name="Observacao" class="form-control"
-                id="Observacao" min="0" max="999999" required>
+              <input type="text" name="Observacao" placeholder="Digite observações do produto" class="form-control" id="Observacao">
             </div>
 
           </div>

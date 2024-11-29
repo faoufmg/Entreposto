@@ -74,7 +74,7 @@ try {
     $Validade = $Validade ?: NULL;
 
     // Verifica se já existe uma entrada para o mesmo produto e validade
-    $query = "SELECT Entrada_id, QuantidadeEntrou, QuantidadeRestante 
+    $query = "SELECT Entrada_id, QuantidadeEntrou, QuantidadeRestante, MovimentacaoDatas_id 
               FROM Entrada 
               WHERE Produto_id = :Produto_id AND 
                     (Validade = :Validade OR (Validade IS NULL AND :Validade IS NULL))";
@@ -86,24 +86,26 @@ try {
 
     if ($entradaExistente) {
         // Atualiza a entrada existente
-        // $novaQuantidade = $entradaExistente['Quantidade'] + $Quantidade;
+        $QuantidadeEntrou = $entradaExistente['QuantidadeEntrou'] + $Quantidade;
+        $QuantidadeRestante = $entradaExistente['QuantidadeRestante'] + $Quantidade;
 
-        // $query = "UPDATE Entrada
-        //           SET Quantidade = :novaQuantidade, Usuario = :Usuario 
-        //           WHERE Entrada_id = :Entrada_id";
-        // $stmt = $pdo->prepare($query);
-        // $stmt->bindParam(':novaQuantidade', $novaQuantidade, PDO::PARAM_INT);
-        // $stmt->bindParam(':Usuario', $Usuario, PDO::PARAM_STR);
-        // $stmt->bindParam(':Entrada_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
-        // $stmt->execute();
+        $query = "UPDATE Entrada
+                  SET QuantidadeRestante = :QuantidadeRestante, QuantidadeEntrou = :QuantidadeEntrou, Usuario = :Usuario
+                  WHERE Entrada_id = :Entrada_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':QuantidadeRestante', $QuantidadeRestante, PDO::PARAM_INT);
+        $stmt->bindParam(':QuantidadeEntrou', $QuantidadeEntrou, PDO::PARAM_INT);
+        $stmt->bindParam(':Usuario', $Usuario, PDO::PARAM_STR);
+        $stmt->bindParam(':Entrada_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
+        $stmt->execute();
 
-        // // Atualiza a data na tabela MovimentacaoDatas
-        // $query = "INSERT INTO MovimentacaoDatas (OrigemMovimentacao, Movimentacao_id, DataMovimentacao)
-        //           VALUES ('Entrada', :Movimentacao_id, :DataMovimentacao)";
-        // $stmt = $pdo->prepare($query);
-        // $stmt->bindParam(':Movimentacao_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
-        // $stmt->bindParam(':DataMovimentacao', $DataCad, PDO::PARAM_STR);
-        // $stmt->execute();
+        // Atualiza a data na tabela MovimentacaoDatas
+        $query = "INSERT INTO MovimentacaoDatas (MovimentacaoData_id, OrigemMovimentacao, DataMovimentacao)
+                  VALUES (:MovimentacaoData_id, 'Entrada', :DataMovimentacao)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':MovimentacaoData_id', $entradaExistente['MovimentacaoDatas_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':DataMovimentacao', $DataCad, PDO::PARAM_STR);
+        $stmt->execute();
 
         echo "<script>
                 alert('Entrada atualizada com sucesso.');
@@ -131,10 +133,6 @@ try {
         $stmt->bindParam(':QuantidadeRestante', $Quantidade, PDO::PARAM_INT);
         $stmt->bindParam(':MovimentacaoDatas_id', $MovimentacaoDatas_id, PDO::PARAM_INT);
         $stmt->execute();
-
-        echo "teste2";
-
-        echo "teste3";
 
         echo "<script>
                 alert('Entrada cadastrada com sucesso.');

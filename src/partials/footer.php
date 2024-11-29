@@ -32,16 +32,16 @@
 <script src="https://code.highcharts.com/modules/no-data-to-display.js"></script>
 
 
-<!-- Validade -->
+<!-- Informacoes -->
 <script>
-  function Validade() {
-    var selectedMaterial = $("#SeletorProduto").val();
+  function Informacoes() {
+    var selectedMaterial = $("#SeletorRetirada").val();
     if (!selectedMaterial) return;
 
     $('#loading-indicator').show();
     $.ajax({
       type: 'POST',
-      url: '../models/funcao_validade.php',
+      url: '../models/funcao_informacoes.php',
       data: { material: selectedMaterial },
       success: function (data) {
         $('#Informacoes').val(data);
@@ -57,10 +57,8 @@
 
   $(document).ready(function () {
     $('#Informacoes').val('');
-    $('#Quantidade').val('');
-    $('#Observacao').val('');
 
-    $('#SeletorProduto').change(Validade);
+    $('#SeletorRetirada').change(Informacoes);
   });
 </script>
 
