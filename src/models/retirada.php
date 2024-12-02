@@ -45,6 +45,7 @@ try {
 
     $MovimentacaoDatas_id = $pdo->lastInsertId();
 
+    // Insere na tabela Saida
     $query = "INSERT INTO Saida (Produto_id, Destino, Observacao, QuantidadeSaiu, Usuario, MovimentacaoDatas_id)
               VALUES (:Produto_id, :Destino, :Observacao, :QuantidadeSaiu, :Usuario, :MovimentacaoDatas_id)";
     $stmt = $pdo->prepare($query);
@@ -55,6 +56,9 @@ try {
     $stmt->bindParam(':Usuario', $Usuario, PDO::PARAM_STR);
     $stmt->bindParam(':MovimentacaoDatas_id', $MovimentacaoDatas_id, PDO::PARAM_INT);
     $stmt->execute();
+
+    // Reduz a quantidade na tabela Entrada
+    
 
     echo "<script>
             alert('Saída cadastrada com sucesso.');

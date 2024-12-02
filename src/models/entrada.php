@@ -99,7 +99,7 @@ try {
         $stmt->bindParam(':Entrada_id', $entradaExistente['Entrada_id'], PDO::PARAM_INT);
         $stmt->execute();
 
-        // Atualiza a data na tabela MovimentacaoDatas
+        // Adiciona nova data na tabela MovimentacaoDatas
         $query = "INSERT INTO MovimentacaoDatas (MovimentacaoData_id, OrigemMovimentacao, DataMovimentacao)
                   VALUES (:MovimentacaoData_id, 'Entrada', :DataMovimentacao)";
         $stmt = $pdo->prepare($query);
