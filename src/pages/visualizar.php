@@ -1,50 +1,52 @@
 <?php
 include_once("../partials/header.php");
 include_once("../../config/db.php");
-
-$row = mysqli_query($conn, "SELECT * from Entrada");
-
 ?>
 
-<section class="conteudo-visualizar">
+<section class="principal-index bg-color-cinza">
   <div class="container-fluid">
 
     <figure class="text-center">
-      <h1>Listagem de Produtos</h1>
+      <h1>Visualizar</h1>
     </figure>
 
-    <table id="One" class="table table-striped table-bordered text-center" style="width:100%;">
-      <thead class="table-dark">
-        <tr>
-          <th>Nome</th>
-          <th>Validade</th>
-          <th>Data de Cadastro</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Código</th>
-          <th>Local</th>
-        </tr>
-      </thead>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="row gy-2">
 
-      <tbody>
-        <?php
-        while ($result = mysqli_fetch_array($row)) {
-          echo "<tr>";
-          echo "<td>" . mb_convert_case($result['Nome'], MB_CASE_TITLE, 'UTF-8') . "</td>";
-          echo "<td>" . date('d/m/Y', strtotime($result['Validade'])) . "</td>";
-          echo "<td>" . date('d/m/Y - H:i:s', strtotime($result['DataCad'])) . "</td>";
-          echo "<td>" . mb_convert_case($result['Descricao'], MB_CASE_TITLE, 'UTF-8') . "</td>";
-          echo "<td>" . $result['Quantidade'] . "</td>";
-          echo "<td>" . $result['Codigo'] . "</td>";
-          echo "<td>" . mb_convert_case($result['Local'], MB_CASE_TITLE, 'UTF-8') . "</td>";
-          echo "</tr>";
-        }
-        ?>
-      </tbody>
-    </table>
+          <div class="col-md-12 col-lg-12 d-flex justify-content-center">
+            <a class="redirecionamento" href="visualizar_entrada.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/criar.svg" width="65px" height="65px" alt="Adicionar Produto">
+                <p class="acoes text-center fw-bold">Entrada</p>
+              </div>
+            </a>
+          </div>
 
-    <div class="col text-center mt-3">
-      <a class="btn btn-secondary" href="../pages/index.php">Voltar</a>
+          <div class="col-md-12 col-lg-12 d-flex justify-content-center">
+            <a class="redirecionamento" href="visualizar_saida.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/editar.svg" width="65px" height="65px" alt="Retirar Produto">
+                <p class="acoes text-center fw-bold">Saída</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-12 col-lg-12 d-flex justify-content-center">
+            <a class="redirecionamento" href="visualizar_demanda.php">
+              <div class="box d-flex flex-column align-items-center">
+                <img src="../../public/image/icons/criar.svg" width="65px" height="65px" alt="Adicionar Produto">
+                <p class="acoes text-center fw-bold">Demanda</p>
+              </div>
+            </a>
+          </div>
+
+            <div class="col text-center mt-3">
+              <a type="button" class="btn btn-primary" style="background-color: #831D1C" href="index.php">Voltar</a>
+            </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </section>

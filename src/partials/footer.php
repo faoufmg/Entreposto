@@ -129,199 +129,52 @@
   }
 </script>
 
-<!-- Tabela -->
+<!-- Tabela Visualizações -->
 <script>
-  var dataAtual = new Date();
-  dataAtual.setDate(dataAtual.getDate() + 7);
-  var formattedDate = dataAtual.toISOString().split('T')[0];
-
-  $(document).ready(function () {
-
-    var table = $('#One').DataTable({
-      scrollY: "450px",
+  $(document).ready(function() {
+    var table = $('#visualizar').DataTable({
+      scrollY: "400px",
       scrollX: true,
       responsive: true,
       paging: true,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json'
       },
-
-      'rowCallback': function (row, data, index) {
-        if (data[4] == 0) {
-          $(row).find('td:eq(4)').css('color', 'red').css('font-weight', 'bold');
-        }
-        if (data[1] < dataAtual) {
-          $(row).find('td:eq(1)').css('color', 'red').css('font-weight', 'bold');
-        }
-      },
-
-      columnDefs: [
-        {
-          targets: [0, 3],
-          render: function (data, type, row) {
-            if (type === 'display') {
-              return '<div class="divScroll">' + data + '</div>';
-            }
-            return data;
+      columnDefs: [{
+        className: 'dt-body-center',
+        render: function(data, type, row) {
+          if (type === 'display') {
+            return '<div class="divScroll">' + data + '</div>';
           }
+          return data;
         }
-      ],
-
-      initComplete: function () {
-        // Apply the search
-        this.api()
-          .columns()
-          .every(function () {
-            var that = this;
-
-            $('input', this.header()).on('keyup change clear', function () {
-              if (that.search() !== this.value) {
-                that.search(this.value).draw();
-              }
-            });
+      }],
+      initComplete: function() {
+        this.api().columns().every(function() {
+          var that = this;
+          $('input', this.header()).on('keyup change clear', function() {
+            if (that.search() !== this.value) {
+              that.search(this.value).draw();
+            }
           });
+        });
       },
-      order: [
-        [0, 'asc']
-      ],
+      order: [[0, 'asc']],
       lengthChange: false,
-      dom: 'Bfrtip',
+      dom: 'Brtip',
       buttons: [],
       displayLength: 10,
     });
 
-    table.buttons().container()
-      .appendTo('#One_wrapper .col-md-6:eq(0)');
-  });
-</script>
-
-<!-- PrinttoPDF and search -->
-<script>
-  $(document).ready(function () {
-
-    var table = $('#example').DataTable({
-      scrollY: "450px",
-      scrollX: true,
-      responsive: true,
-      paging: true,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json'
-      },
-
-      columnDefs: [
-        {
-          targets: [0, 6],
-          render: function (data, type, row) {
-            if (type === 'display') {
-              return '<div class="divScroll">' + data + '</div>';
-            }
-            return data;
-          }
+    $('#visualizar thead tr').clone(true).appendTo('#visualizar thead');
+    $('#visualizar thead tr:eq(1) th').each(function(i) {
+      var title = $(this).text();
+      $(this).html('<input type="text" placeholder="Buscar ' + title + '" />');
+      $('input', this).on('keyup change', function() {
+        if (table.column(i).search() !== this.value) {
+          table.column(i).search(this.value).draw();
         }
-      ],
-
-      initComplete: function () {
-        // Apply the search
-        this.api()
-          .columns()
-          .every(function () {
-            var that = this;
-
-            $('input', this.header()).on('keyup change clear', function () {
-              if (that.search() !== this.value) {
-                that.search(this.value).draw();
-              }
-            });
-          });
-      },
-      // order: [
-      //   [0,'asc']
-      // ],
-      lengthChange: false,
-      dom: 'Bfrtip',
-      buttons: ['excel',
-        {
-          extend: 'pdf',
-          pageSize: 'A4',
-          orientation: 'landscape',
-          customize: function (doc) {
-            doc.styles.tableBodyEven.alignment = 'center';
-            doc.styles.tableBodyOdd.alignment = 'center';
-            doc.content[1].table.widths =
-              Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-          }
-        },
-
-      ],
-      displayLength: 10,
+      });
     });
-
-    table.buttons().container()
-      .appendTo('#example_wrapper .col-md-6:eq(0)');
-  });
-</script>
-
-<script>
-  $(document).ready(function () {
-
-    var table = $('#relatorioCompleto').DataTable({
-      scrollY: "450px",
-      scrollX: true,
-      responsive: true,
-      paging: true,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json'
-      },
-
-      columnDefs: [
-        {
-          targets: [0, 6],
-          render: function (data, type, row) {
-            if (type === 'display') {
-              return '<div class="divScroll">' + data + '</div>';
-            }
-            return data;
-          }
-        }
-      ],
-
-      initComplete: function () {
-        // Apply the search
-        this.api()
-          .columns()
-          .every(function () {
-            var that = this;
-
-            $('input', this.header()).on('keyup change clear', function () {
-              if (that.search() !== this.value) {
-                that.search(this.value).draw();
-              }
-            });
-          });
-      },
-      // order: [
-      //   [0,'asc']
-      // ],
-      lengthChange: false,
-      dom: 'Bfrtip',
-      buttons: ['excel',
-        {
-          extend: 'pdf',
-          pageSize: 'A4',
-          orientation: 'landscape',
-          customize: function (doc) {
-            doc.styles.tableBodyEven.alignment = 'center';
-            doc.styles.tableBodyOdd.alignment = 'center';
-            doc.content[1].table.widths =
-              Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-          }
-        },
-
-      ],
-      displayLength: 10,
-    });
-
-    table.buttons().container()
-      .appendTo('#relatorioCompleto_wrapper .col-md-6:eq(0)');
   });
 </script>
