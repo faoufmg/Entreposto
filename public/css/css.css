@@ -121,7 +121,7 @@ section.principal {
 }
 
 section.principal-index {
-  padding: 20vh 0 !important;
+  padding: 18vh 0 !important;
   flex: 1;
   /* Faz o conteúdo expandir para preencher o espaço disponível */
 }
